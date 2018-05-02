@@ -1,0 +1,7 @@
+include ':app',
+        ':publiclibrary',
+        ':aoplibrary',
+        ':component_one',
+        ':component_two',
+        ':component_three',
+        'processor'

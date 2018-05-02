@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CommonAppV3.iml" filepath="$PROJECT_DIR$/CommonAppV3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aoplibrary/aoplibrary.iml" filepath="$PROJECT_DIR$/aoplibrary/aoplibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component_one/component_one.iml" filepath="$PROJECT_DIR$/component_one/component_one.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component_three/component_three.iml" filepath="$PROJECT_DIR$/component_three/component_three.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component_two/component_two.iml" filepath="$PROJECT_DIR$/component_two/component_two.iml" />
+      <module fileurl="file://$PROJECT_DIR$/processor/processor.iml" filepath="$PROJECT_DIR$/processor/processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/publiclibrary/publiclibrary.iml" filepath="$PROJECT_DIR$/publiclibrary/publiclibrary.iml" />
+    </modules>
+  </component>
+</project>

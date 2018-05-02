@@ -1,0 +1,107 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="margin_normal_spec">10dp</dimen>
+    <dimen name="comm_title_bar_ver">55dp</dimen>
+    <dimen name="comm_title_bar_ver_minus">-55dp</dimen>
+
+    <!--通用字体-->
+    <dimen name="text_xmid_size">12sp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+
+    <!--app 文字字体大小-->
+    <dimen name="text_size_max">22sp</dimen>
+    <dimen name="text_size_larger">20sp</dimen>
+        <dimen name="text_size_large">18sp</dimen> <!--标题-->
+    <dimen name="text_size_normal">16sp</dimen> <!--副标题-->
+    <dimen name="text_size_small">14sp</dimen> <!--文本-->
+    <dimen name="text_size_smaller">12sp</dimen> <!--主页tab栏-->
+    <dimen name="text_size_min">10sp</dimen>
+
+    <!-- 控件之间300dp距离 -->
+    <dimen name="widget_distance_300">300dp</dimen>
+    <!-- 控件之间280dp距离 -->
+    <dimen name="widget_distance_280">280dp</dimen>
+    <!-- 控件之间250dp距离 -->
+    <dimen name="widget_distance_250">250dp</dimen>
+    <!-- 控件之间200dp距离 -->
+    <dimen name="widget_distance_200">200dp</dimen>
+    <!-- 控件之间150dp距离 -->
+    <dimen name="widget_distance_150">150dp</dimen>
+    <!-- 控件之间125dp距离 -->
+    <dimen name="widget_distance_125">125dp</dimen>
+    <!-- 控件之间120dp距离 -->
+    <dimen name="widget_distance_120">120dp</dimen>
+    <!-- 控件之间110dp距离 -->
+    <dimen name="widget_distance_110">110dp</dimen>
+    <!-- 控件之间100dp距离 -->
+    <dimen name="widget_distance_100">100dp</dimen>
+    <!-- 控件之间90dp距离 -->
+    <dimen name="widget_distance_90">90dp</dimen>
+    <!-- 控件之间80dp距离 -->
+    <dimen name="widget_distance_80">80dp</dimen>
+    <!-- 控件之间70dp距离 -->
+    <dimen name="widget_distance_70">70dp</dimen>
+    <!-- 控件之间60dp距离 -->
+    <dimen name="widget_distance_60">60dp</dimen>
+    <!-- 控件之间50dp距离 -->
+    <dimen name="widget_distance_50">50dp</dimen>
+    <!-- 控件之间45dp距离 -->
+    <dimen name="widget_distance_45">45dp</dimen>
+    <!-- 控件之间40dp距离 -->
+    <dimen name="widget_distance_40">40dp</dimen>
+    <!-- 控件之间30dp距离 -->
+    <dimen name="widget_distance_30">30dp</dimen>
+    <!-- 控件之间25dp距离 -->
+    <dimen name="widget_distance_25">25dp</dimen>
+    <!-- 控件之间20dp距离 -->
+    <dimen name="widget_distance_20">20dp</dimen>
+    <!-- 控件之间15dp距离 -->
+    <dimen name="widget_distance_15">15dp</dimen>
+    <!-- 控件之间12dp距离 -->
+    <dimen name="widget_distance_12">12dp</dimen>
+    <!-- 控件之间10dp距离 -->
+    <dimen name="widget_distance_10">10dp</dimen>
+    <!-- 控件之间8dp距离 -->
+    <dimen name="widget_distance_8">8dp</dimen>
+    <!-- 控件之间5dp距离 -->
+    <dimen name="widget_distance_5">5dp</dimen>
+    <!-- 控件之间3dp距离 -->
+    <dimen name="widget_distance_3">3dp</dimen>
+    <!-- 控件之间2dp距离 -->
+    <dimen name="widget_distance_2">2dp</dimen>
+    <!-- 控件之间1dp距离 -->
+    <dimen name="widget_distance_1">1dp</dimen>
+    <!-- 控件之间0.5dp距离 -->
+    <dimen name="widget_distance_0.5">0.5dp</dimen>
+    <!--按钮左右距离-->
+    <dimen name="button_distance">30dp</dimen>
+
+    <!-- 设计稿 关注内容 头像宽高 -->
+    <dimen name="topic_head_wh">50dp</dimen>
+    <!-- 设计稿 关注内容 头像标签宽高 -->
+    <dimen name="topic_head_bq_wh">20dp</dimen>
+    <!-- 设计稿 关注内容 昵称、简介文本大小 -->
+    <dimen name="topic_name_text">@dimen/text_xmid_size</dimen>
+    <!-- 设计稿 关注内容 展示图片的宽高 -->
+    <dimen name="topic_pics_wh">60dp</dimen>
+
+    <!-- 设计稿 详情页 导航小图标 图片的宽高 -->
+    <dimen name="nav_img_wh">12dp</dimen>
+    <dimen name="tv_size_title">16sp</dimen>
+
+    <dimen name="bottom_menu_height">100dp</dimen>
+
+
+</resources>

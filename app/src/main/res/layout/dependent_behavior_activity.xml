@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:textSize="25sp"
+        android:text="+"
+        android:gravity="center"
+        android:layout_gravity="top|left"
+        android:id="@+id/behavior_left_tv"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:background="@color/blue"/>
+
+    <TextView
+        android:textSize="25sp"
+        android:text="-"
+        android:gravity="center"
+        app:layout_behavior="com.example.rogge.other.behavior.DependentBehavior"
+        android:id="@+id/behavior_right_tv"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|right"
+        android:background="@color/gary"/>
+</android.support.design.widget.CoordinatorLayout>

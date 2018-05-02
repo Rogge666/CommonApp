@@ -1,0 +1,219 @@
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.aspectj:aspectjtools:1.8.9'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+/*Ⅰ 当前时间字符串变量，作为内部版本号的一部分，标示每个版本，每一天要sync一次该gradle以更新该变量；
+Ⅱ精确到小时，避免生成apk太多，也避免路径查找失败*/
+def InnerVersionName = new Date().format('yyMMdd')
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
+    defaultConfig {
+        applicationId "com.example.rogge"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+
+        /*app名字 */
+        resValue "string", "app_name", "基础框架"
+
+        multiDexEnabled true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    /*为apk自动替换生成新名字，格式如： [項目名]_[test/release]_[version]_[date].apk*/
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(output.outputFile.parent,
+                    output.outputFile.name
+                            .replace("-debug", "_test")
+                            .replace("app", "common")
+                            .replace(".apk",
+                            "_" + defaultConfig.versionName
+                                    + "_" + InnerVersionName + ".apk")
+            )
+        }
+    }
+
+    buildTypes {
+
+        release {
+            //混淆
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "ISDEBUG", "false"
+            buildConfigField "boolean", "isPlugin", isPlugin.toString()
+            /*app名字 */
+            resValue "string", "app_name", "基础框架"
+
+        }
+        debug {
+            minifyEnabled false
+            applicationIdSuffix ".debug" //为debug 的buildType在application加后缀
+            debuggable true
+            buildConfigField "boolean", "ISDEBUG", "true"
+            buildConfigField "boolean", "isPlugin", isPlugin.toString()
+            /*app名字 */
+            resValue "string", "app_name", "基础框架"
+
+        }
+    }
+
+    compileOptions {
+        //必须配置jdk8，lambda必须
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    retrolambda {
+        javaVersion JavaVersion.VERSION_1_6
+    }
+
+    //打包配置
+    packagingOptions {
+        exclude '.readme'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/MANIFEST.MF'
+        exclude '!META-INF/MANIFEST.MF'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/README.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/maven/com.belerweb/pinyin4j/pom.xml'
+        exclude 'META-INF/maven/com.belerweb/pinyin4j/pom.properties'
+    }
+
+    //配置任务dexdebug的选项：扩大使用内存防止OOM
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.google.code.gson:gson:2.8.0'
+    //时间选择，省市区选择
+    compile(name: 'pickerview-release', ext: 'aar')
+    //热更新
+    compile 'com.alipay.euler:andfix:0.5.0@aar'
+
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'com.squareup:javapoet:1.4.0'
+    compile files('libs/processor.jar')
+    compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile group: 'com.ashokvarma.android', name: 'bottom-navigation-bar', version: '1.3.0'
+
+    annotationProcessor "com.alibaba:arouter-compiler:1.1.4"
+    annotationProcessor "com.jakewharton:butterknife-compiler:8.5.1"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.9"
+
+    compile project(':aoplibrary')
+
+    if (isPlugin.toBoolean()) {
+        compile project(':component_one')
+//        compile project(':component_two')
+//        compile project(':component_three')
+    } else {
+        compile project(':publiclibrary')
+    }
+}
+
+final def log = project.logger
+final def variants = project.android.applicationVariants
+
+variants.all { variant ->
+    if (!variant.buildType.isDebuggable()) {
+        log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
+        return;
+    }
+
+    JavaCompile javaCompile = variant.javaCompile
+    javaCompile.doLast {
+        String[] args = ["-showWeaveInfo",
+                         "-1.5",
+                         "-inpath", javaCompile.destinationDir.toString(),
+                         "-aspectpath", javaCompile.classpath.asPath,
+                         "-d", javaCompile.destinationDir.toString(),
+                         "-classpath", javaCompile.classpath.asPath,
+                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+        log.debug "ajc args: " + Arrays.toString(args)
+
+        MessageHandler handler = new MessageHandler(true);
+        new Main().run(args, handler);
+        for (IMessage message : handler.getMessages(null, true)) {
+            switch (message.getKind()) {
+                case IMessage.ABORT:
+                case IMessage.ERROR:
+                case IMessage.FAIL:
+                    log.error message.message, message.thrown
+                    break;
+                case IMessage.WARNING:
+                    log.warn message.message, message.thrown
+                    break;
+                case IMessage.INFO:
+                    log.info message.message, message.thrown
+                    break;
+                case IMessage.DEBUG:
+                    log.debug message.message, message.thrown
+                    break;
+            }
+        }
+    }
+}
