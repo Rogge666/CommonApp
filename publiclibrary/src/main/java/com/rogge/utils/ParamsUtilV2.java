@@ -22,7 +22,7 @@ import java.util.Random;
  */
 
 public class ParamsUtilV2 {
-    private static final String PUB_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwvxlkRWWjf277+wpYuSiWKbPntpQWmhGZOGiDzCsBlUmckcTsWBpKjrBBrD6UC3JBi/nxH8GX/Mo/kNVusl1Q/xn+Uhd0NmLiXZjeP0Ic1yOuYgTcBjN1FIgQmxqiAxKmARSDQu+76u9ZXkiFC7HaihVQgs4zR3mevf3Q4KM5LUl2aRWzmwTJfKDgZ4ubD38vu/K0qVFXmPIOpdOQn7rGpKJxCDGR+DYFpJrjl6hlkwe9RDWtvODOBlaXZPDfkiFTbo3JCqdOgIYDRAEgbcR2R2tzx2Q8brVVJU9qk4suyg4eHILW0fCCqOTaoWwX1w7JVJYpU/6e7FYpEs8lrjPpwIDAQAB";
+    private static final String PUB_KEY = "+wpYuSiWKbPntpQWmhGZOGiDzCsBlUmckcTsWBpKjrBBrD6UC3JBi/nxH8GX/Mo/kNVusl1Q/xn++76u9ZXkiFC7HaihVQgs4zR3mevf3Q4KM5LUl2aRWzmwTJfKDgZ4ubD38vu/K0qVFXmPIOpdOQn7rGpKJxCDGR+DYFpJrjl6hlkwe9RDWtvODOBlaXZPDfkiFTbo3JCqdOgIYDRAEgbcR2R2tzx2Q8brVVJU9qk4suyg4eHILW0fCCqOTaoWwX1w7JVJYpU/6e7FYpEs8lrjPpwIDAQAB";
     public static String DES_KEY = "";
 
     private Map<String, String> params;
@@ -54,7 +54,7 @@ public class ParamsUtilV2 {
             reqKey = EncryptUtils.encryptRSAForClient(DES_KEY, EncryptUtils.getPubKey(PUB_KEY));
         }
         reqMsg = EncryptUtils.aesEncrypt(ps, DES_KEY);
-        sign = EncryptUtils.bitToAsc(EncryptUtils.encryptHmacSHA256(("POST" + '&' + "/citiccard/SitStaAppServerWeb/rest/" + urlName + ".do" + '&' + "req_key=" + reqKey + '&' + "req_msg=" + reqMsg + '&').getBytes(), DES_KEY.getBytes()));
+        sign = EncryptUtils.bitToAsc(EncryptUtils.encryptHmacSHA256(("POST" + '&' + "/com/rogge/rest/" + urlName + ".do" + '&' + "req_key=" + reqKey + '&' + "req_msg=" + reqMsg + '&').getBytes(), DES_KEY.getBytes()));
         params.clear();
         params.put("req_key", reqKey);
         params.put("req_msg", reqMsg);
