@@ -72,6 +72,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             }
             addFragment(R.id.main_container, myFragment, "my_fragment");
         }
+        mFragmentManager.beginTransaction()
+                .hide(findFragment)
+                .hide(myFragment)
+                .show(fragmentHome)
+                .commitAllowingStateLoss();
     }
 
     @Override
