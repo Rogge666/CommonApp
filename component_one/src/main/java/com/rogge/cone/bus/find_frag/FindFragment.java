@@ -15,7 +15,6 @@ import com.rogge.api.ComponentOneAPI;
 import com.rogge.base.BaseFragment;
 import com.rogge.cone.R;
 import com.rogge.cone.R2;
-import com.rogge.cone.adapter.FindRVA;
 import com.rogge.cone.bean.FindDataBean;
 
 import java.util.List;

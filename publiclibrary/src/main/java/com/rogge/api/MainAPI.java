@@ -12,5 +12,5 @@ package com.rogge.api;
  */
 
 public interface MainAPI {
-
+    String TEST_ACTIVITY = "/main/test";
 }

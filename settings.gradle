@@ -3,5 +3,4 @@ include ':app',
         ':aoplibrary',
         ':component_one',
         ':component_two',
-        ':component_three',
         'processor'

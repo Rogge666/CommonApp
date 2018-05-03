@@ -44,11 +44,16 @@ public class MyApplication extends Application {
 
         Utils.init(this);
         ServiceUtils.init(this);
+        //初始化依赖的ServiceUtils
         if (BuildConfig.isPlugin){
             try {
-                Class serverUtilsClass = Class.forName("com.rogge.cone.http.ServiceUtils");
-                Method method = serverUtilsClass.getMethod("init",Application.class);
-                method.invoke(null,this);
+                Class serverUtilsClass1 = Class.forName("com.rogge.cone.http.ServiceUtils");
+                Method method1 = serverUtilsClass1.getMethod("init",Application.class);
+                method1.invoke(null,this);
+
+                Class serverUtilsClass2 = Class.forName("com.rogge.ctwo.http.ServiceUtils");
+                Method method2 = serverUtilsClass2.getMethod("init",Application.class);
+                method2.invoke(null,this);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (NoSuchMethodException e) {

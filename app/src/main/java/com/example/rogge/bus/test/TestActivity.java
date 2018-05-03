@@ -4,8 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.rogge.R;
 import com.example.rogge.aop.KSingleClick;
+import com.rogge.api.MainAPI;
 import com.rogge.base.BaseActivity;
 import com.rogge.base.BaseSubscriber;
 import com.rogge.base_bean.BaseRespModel;
@@ -34,8 +38,11 @@ import rx.schedulers.Schedulers;
  * @author Created by Rogge on 2018/5/1 0001.
  * @since 1.0.0
  */
-
+@Route(path = MainAPI.TEST_ACTIVITY)
 public class TestActivity extends BaseActivity {
+
+    @Autowired
+    String title;
 
     @BindView(R.id.test_rv)
     RecyclerView recyclerView;
@@ -56,6 +63,7 @@ public class TestActivity extends BaseActivity {
         testCase();
     }
 
+    //使用aop做的防止重复点击的注解
     @KSingleClick
     @OnClick(R.id.test_fab)
     public void onClick(View view) {
@@ -63,7 +71,8 @@ public class TestActivity extends BaseActivity {
     }
 
     private void testCase() {
-        mToolBarManager.setTitle("测试用例");
+        ARouter.getInstance().inject(this);
+        mToolBarManager.setTitle(title);
         //利用观察者模式实现的一个单选例子
         RelevanceSingleCheck lRelevanceSingleCheck = new RelevanceSingleCheck();
         lRelevanceSingleCheck.relevanceSingleCheck(testWe, testYour, testThey);
@@ -103,6 +112,7 @@ public class TestActivity extends BaseActivity {
                 .map(bool -> {
                     BaseRespModel<Boolean> ss = new BaseRespModel<>();
                     ss.setError(bool);
+                    ss.setResults(true);
                     return ss;
                 })
                 .doOnUnsubscribe(() -> Log.e("haha", "doOnUnsubscribe"))

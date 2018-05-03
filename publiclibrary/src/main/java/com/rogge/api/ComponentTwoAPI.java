@@ -12,5 +12,5 @@ package com.rogge.api;
  */
 
 public interface ComponentTwoAPI {
-    
+    String MY_FRAGMENT = "/componentTwo/my";
 }

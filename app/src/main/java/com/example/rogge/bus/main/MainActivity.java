@@ -11,6 +11,7 @@ import com.example.rogge.BuildConfig;
 import com.example.rogge.R;
 import com.example.rogge.bus.home_fragment.FragmentHome;
 import com.rogge.api.ComponentOneAPI;
+import com.rogge.api.ComponentTwoAPI;
 import com.rogge.base.AppManager;
 import com.rogge.base.BaseActivity;
 
@@ -26,7 +27,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private FragmentManager mFragmentManager;
     private FragmentHome fragmentHome;
     private Fragment findFragment;
-    private FragmentHome fragmentHome2;
+    private Fragment myFragment;
 
     @Override
     public int getLayoutId() {
@@ -50,22 +51,26 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mFragmentManager = getSupportFragmentManager();
         fragmentHome = (FragmentHome) mFragmentManager.findFragmentByTag("home_fragment");
         findFragment = mFragmentManager.findFragmentByTag("find_fragment");
-        fragmentHome2 = (FragmentHome) mFragmentManager.findFragmentByTag("my_fragment");
+        myFragment = mFragmentManager.findFragmentByTag("my_fragment");
         if (fragmentHome == null) {
             fragmentHome = new FragmentHome();
             addFragment(R.id.main_container, fragmentHome, "home_fragment");
         }
         if (findFragment == null) {
-            if (BuildConfig.isPlugin){
+            if (BuildConfig.isPlugin) {
                 findFragment = (Fragment) ARouter.getInstance().build(ComponentOneAPI.FIND_FRAGMENT).navigation();
-            }else {
+            } else {
                 findFragment = new FragmentHome();
             }
             addFragment(R.id.main_container, findFragment, "find_fragment");
         }
-        if (fragmentHome2 == null) {
-            fragmentHome2 = new FragmentHome();
-            addFragment(R.id.main_container, fragmentHome2, "my_fragment");
+        if (myFragment == null) {
+            if (BuildConfig.isPlugin) {
+                myFragment = (Fragment) ARouter.getInstance().build(ComponentTwoAPI.MY_FRAGMENT).navigation();
+            } else {
+                myFragment = new FragmentHome();
+            }
+            addFragment(R.id.main_container, myFragment, "my_fragment");
         }
     }
 
@@ -75,14 +80,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             default:
                 mFragmentManager.beginTransaction()
                         .hide(findFragment)
-                        .hide(fragmentHome2)
+                        .hide(myFragment)
                         .show(fragmentHome)
                         .commitAllowingStateLoss();
                 break;
             case 1:
                 mFragmentManager.beginTransaction()
                         .hide(fragmentHome)
-                        .hide(fragmentHome2)
+                        .hide(myFragment)
                         .show(findFragment)
                         .commitAllowingStateLoss();
                 break;
@@ -90,7 +95,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 mFragmentManager.beginTransaction()
                         .hide(fragmentHome)
                         .hide(findFragment)
-                        .show(fragmentHome2)
+                        .show(myFragment)
                         .commitAllowingStateLoss();
                 break;
         }

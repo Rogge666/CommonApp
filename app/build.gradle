@@ -168,8 +168,7 @@ dependencies {
 
     if (isPlugin.toBoolean()) {
         compile project(':component_one')
-//        compile project(':component_two')
-//        compile project(':component_three')
+        compile project(':component_two')
     } else {
         compile project(':publiclibrary')
     }
